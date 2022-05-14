@@ -3,7 +3,7 @@ Disk1of5 CR10 V3 Marlin Firmware
 based off of the great work of https://git.pickysysadmin.ca/FiZi/cr-10-v3-marlin-config
 
 ## Changes
-1) reduced Z height for cable chain and Zsync Kit
+1) reduced Z height for cable chain and Zsync Kit 350 (un tested at the moment)
 2) auto build docker automation.
 3) I wanted to put a custom disk logo in.
 
