@@ -1,0 +1,38 @@
+name: Manual Build Marlin Firmware
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Job to run.'
+        required: true
+        default: 'build_and_push'
+
+jobs:
+  build_and_push:
+    name: Compile and Push Firmware
+    runs-on: ubuntu-latest
+    env:
+      BOARD: mega2560
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Compile firmware
+        run: |
+          docker run \
+            -u root:root \
+            -e BOARD \
+            -e UPDATE_FORCE=true \
+            -e FW_EXTENSION="hex" \
+            -v $(pwd)/Firmware/Builds:/home/platformio/build \
+            -v $(pwd)/Firmware/Configuration:/home/platformio/CustomConfiguration \
+            frealmyr/marlin-build:latest
+
+      - name: Push firmware
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Compiled firmware"
+          git push
