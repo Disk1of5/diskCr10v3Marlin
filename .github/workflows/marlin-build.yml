@@ -25,6 +25,7 @@ jobs:
             -e BOARD \
             -e UPDATE_FORCE=true \
             -e FW_EXTENSION="hex" \
+            -e USE_TAG="2.0.9.3" \
             -v $(pwd)/Firmware/Builds:/home/platformio/build \
             -v $(pwd)/Firmware/Configuration:/home/platformio/CustomConfiguration \
             frealmyr/marlin-build:latest
